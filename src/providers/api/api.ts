@@ -17,7 +17,7 @@ export class Api {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      this.http.post('http://localhost:8080/getLogin', userObject, { headers: headers })
+      this.http.post('https://immense-river-69583.herokuapp.com/getLogin', userObject, { headers: headers })
         .subscribe(res => {
           this.settingsInformation = res.json();
           resolve(res.json());
@@ -31,7 +31,7 @@ export class Api {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      this.http.get('http://localhost:8080/getAdminNewOrders', { headers: headers })
+      this.http.get('https://immense-river-69583.herokuapp.com/getAdminNewOrders', { headers: headers })
         .subscribe(res => {
           this.settingsInformation = res.json();
           resolve(res.json());
