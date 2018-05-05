@@ -1,0 +1,19 @@
+<ion-header>
+</ion-header>
+
+<ion-content class="backgroundstyle">
+  <h2 class="logInPlacement">Log In</h2>
+  <ion-item class="backgroundstyle">
+    <ion-label stacked style="color:white;">Username/Email</ion-label>
+    <ion-input type="text" class="fieldStyle" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item class="backgroundstyle" style="padding-bottom: 40px;padding-top: 35px;">
+    <ion-label stacked style="color:white">Password</ion-label>
+    <ion-input type="password" class="fieldStyle" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <div padding>
+    <button ion-button color="primary" class="boxPlacement" block (click)="doLogin()">GET STARTED</button>
+  </div>
+</ion-content>
