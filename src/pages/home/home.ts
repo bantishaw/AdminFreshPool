@@ -8,8 +8,9 @@ import { Http } from '@angular/http';
 })
 export class HomePage {
   existingUser: any;
+  orderDetails: any;
   constructor(public navCtrl: NavController, public toastCtrl: ToastController,
-    public apiProvider: Api, public loadingCtrl: LoadingController, public http: Http, ) {
+    public apiProvider: Api, public loadingCtrl: LoadingController, public http: Http) {
 
   }
 
@@ -24,7 +25,7 @@ export class HomePage {
       if (this.existingUser.response === 'success') {
         loading.dismiss();
         setTimeout(() => {
-          //this.navCtrl.push(HomePage);
+          this.orderDetails = this.existingUser.data;
         }, 500);
       } else {
         loading.dismiss();
@@ -43,5 +44,12 @@ export class HomePage {
       cssClass: 'showToast'
     });
     toast.present();
+  }
+
+  doRefresh(refresher) {
+    this.ionViewDidEnter();
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
   }
 }
