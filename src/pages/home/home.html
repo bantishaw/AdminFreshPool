@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
+    <ion-title class="pageTitle">
       Admin Management
     </ion-title>
   </ion-navbar>
@@ -25,7 +25,6 @@
       <p>Amount Payable : ₹{{item.total_amount}}</p>
       <p>Address : {{item.UserAddress}}</p>
     </ion-card-content>
-
-    <button ion-button full style="text-transform: capitalize;">{{item.customerName}}'s Orders</button>
+    <button ion-button full style="text-transform: capitalize;" (click)="goToOrder(item)">{{item.customerName}}'s Orders</button>
   </ion-card>
 </ion-content>

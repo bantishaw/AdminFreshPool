@@ -9,12 +9,13 @@ import { Api } from '../providers/api/api';
 import { LoginPage } from '../pages/login/login';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-
+import { UpdateOrderPage } from '../pages/update-order/update-order';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    UpdateOrderPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,8 @@ import { HttpModule } from '@angular/http';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    UpdateOrderPage
   ],
   providers: [
     StatusBar,

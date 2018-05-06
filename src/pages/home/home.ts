@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController, LoadingController } from 'ionic-angular';
 import { Api } from '../../providers/api/api';
 import { Http } from '@angular/http';
+import { UpdateOrderPage } from '../update-order/update-order'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -51,5 +52,9 @@ export class HomePage {
     setTimeout(() => {
       refresher.complete();
     }, 2000);
+  }
+
+  goToOrder(individualOrder) {
+    this.navCtrl.push(UpdateOrderPage, { processOrder: individualOrder });
   }
 }
