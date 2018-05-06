@@ -16,11 +16,11 @@
   </ion-refresher>
   <ion-card *ngFor="let item of orderDetails" class="cardStyle">
     <ion-card-content>
-      <ion-card-title style="margin-top: -15px;">
+      <ion-card-title class="name">
         {{item.customerName}}
+        <ion-note class="noteAmount"> ₹{{item.total_amount}}</ion-note>
       </ion-card-title>
       <p>Mobile : {{item.userPhoneNumber}}</p>
-      <p>Email : {{item.reference_email}}</p>
       <p>Date of Order : {{item.date_of_order_placing}}</p>
       <p>Amount Payable : ₹{{item.total_amount}}</p>
       <p>Address : {{item.UserAddress}}</p>

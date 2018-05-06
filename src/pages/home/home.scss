@@ -3,10 +3,11 @@ page-home {
     margin-left: -10px;
     width: calc(100% - -20px);
     margin-top: 0px;
+    overflow: initial;
   }
   .card-md p {
     margin: 0 0 2px;
-    font-size: 1.4rem;
+    font-size: 13px;
     font-weight: normal;
     line-height: 1.5;
     color: #222;
@@ -28,5 +29,15 @@ page-home {
   .bar-button-md-default {
     color: white;
     background-color: transparent;
+  }
+  .noteAmount {
+    float: right;
+    font-size: 18px !important;
+    color: #488aff;
+  }
+  .name {
+    margin-top: -15px;
+    color: #488aff;
+    font-size: 18px !important;
   }
 }
