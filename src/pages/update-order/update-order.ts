@@ -17,4 +17,8 @@ export class UpdateOrderPage {
     console.log('ionViewDidLoad UpdateOrderPage');
   }
 
+  updateOrder(orderStatus) {
+    console.log("orderStatus", orderStatus)
+  }
+
 }

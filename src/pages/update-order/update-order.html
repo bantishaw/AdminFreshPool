@@ -6,5 +6,34 @@
 
 
 <ion-content padding>
-
+  <ion-card *ngFor="let item of fetchCollection.order_descriptiion" class="cardStyle">
+    <ion-card-content>
+      <ion-card-title class="name">
+        {{item.order_id}}
+        <ion-note class="noteAmount"> ₹{{item.date_of_order_placing}}</ion-note>
+      </ion-card-title>
+      <p>Product : {{item.product}}</p>
+      <p>Description : {{item.description}}</p>
+      <p>Quantity : {{item.quantity}}
+        <ion-note class="noteAmount" style="color:black"> Rate : ₹{{item.rate}}</ion-note>
+      </p>
+      <p>Amount to be paid : ₹{{item.particularProductPrice}}</p>
+      <p>Payment Mode : {{item.payment_mode}}</p>
+      <ion-list radio-group [(ngModel)]="item.itemStatus" style="margin-left: -15px;">
+        <ion-item style="font-size: 13px;">
+          <ion-label>Pending</ion-label>
+          <ion-radio value="Pending" checked style="margin: 0px;"></ion-radio>
+        </ion-item>
+        <ion-item style="font-size: 13px;">
+          <ion-label>Processing</ion-label>
+          <ion-radio value="Processing" style="margin: 0px;"></ion-radio>
+        </ion-item>
+        <ion-item style="font-size: 13px;">
+          <ion-label>Delivered</ion-label>
+          <ion-radio value="Delivered" [disabled]="isDisabled" style="margin: 0px;"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+    <button ion-button full style="text-transform: capitalize;" (click)="updateOrder(item.itemStatus)">Update Order</button>
+  </ion-card>
 </ion-content>
