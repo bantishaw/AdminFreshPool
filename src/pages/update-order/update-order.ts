@@ -14,27 +14,45 @@ export class UpdateOrderPage {
     public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.fetchCollection = navParams.get('processOrder');
     console.log(this.fetchCollection)
+    this.fetchCollection.order_descriptiion.forEach(function (object) {
+      object.imageStatus = object.itemStatus
+    });
+    console.log(this.fetchCollection)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdateOrderPage');
   }
 
-  updateOrder(orderStatus, email,uniqueKeyToBeSearched) {
-    var updateUserOrderObject = {
-      statusToBeUpdated: orderStatus,
-      emailToBeSearched: email,
-      uniqueKey: uniqueKeyToBeSearched
+  updateOrder(orderStatus, email, uniqueKeyToBeSearched, orderIdOfProduct, particularPrice) {
+    var updateUserOrderObject = {};
+    if (orderStatus !== 'Cancelled') {
+      updateUserOrderObject = {
+        statusToBeUpdated: orderStatus,
+        emailToBeSearched: email,
+        uniqueKey: uniqueKeyToBeSearched,
+        orderID: orderIdOfProduct
+      }
+    } else {
+      updateUserOrderObject = {
+        statusToBeUpdated: orderStatus,
+        emailToBeSearched: email,
+        uniqueKey: uniqueKeyToBeSearched,
+        orderID: orderIdOfProduct,
+        particularProductPrice: particularPrice
+      }
     }
     console.log("updateUserOrder", updateUserOrderObject)
     this.apiProvider.updateUserOrder(updateUserOrderObject).then((data) => {
       this.updatedData = data;
       if (this.updatedData.response === 'success') {
-
+        this.fetchCollection = this.updatedData.dataTobeShown
+        this.fetchCollection.order_descriptiion.forEach(function (object) {
+          object.imageStatus = object.itemStatus
+        });
       } else {
         this.toastMessage(this.updatedData.data)
       }
-
     })
   }
 

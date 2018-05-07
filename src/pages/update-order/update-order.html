@@ -32,8 +32,18 @@
           <ion-label>Delivered</ion-label>
           <ion-radio value="Delivered" [disabled]="isDisabled" style="margin: 0px;"></ion-radio>
         </ion-item>
+        <ion-item style="font-size: 13px;">
+          <ion-label>Cancel this Order</ion-label>
+          <ion-radio value="Cancelled" [disabled]="isDisabled" style="margin: 0px;"></ion-radio>
+        </ion-item>
       </ion-list>
+      <div>
+        <img src="assets/imgs/cancelled.svg" class="image"  *ngIf="item.imageStatus === 'Cancelled'" />
+      </div>
+      <div>
+        <img src="assets/imgs/Delivered.svg" class="image"  *ngIf="item.imageStatus === 'Delivered'" />
+      </div>
     </ion-card-content>
-    <button ion-button full style="text-transform: capitalize;" (click)="updateOrder(item.itemStatus,fetchCollection.reference_email,fetchCollection.uniqueKey)">Update Order</button>
+    <button ion-button full style="text-transform: capitalize;"  *ngIf= "item.imageStatus !== 'Cancelled' && item.imageStatus !== 'Delivered'"  (click)="updateOrder(item.itemStatus,fetchCollection.reference_email,fetchCollection.uniqueKey,item.order_id,item.particularProductPrice)">Update Order</button>
   </ion-card>
 </ion-content>
