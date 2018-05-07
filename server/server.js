@@ -1305,7 +1305,7 @@ app.post('/updateUserOrder', function (request, response) {
                 var checkProduct = result[0].myOrders[0].order_descriptiion.map(function (item) { return item.order_id; }).indexOf(request.body.orderID)
                 if (checkProduct !== -1) {
                     result[0].myOrders[0].order_descriptiion[checkProduct].itemStatus = request.body.statusToBeUpdated
-                    if (request.body.statusToBeUpdated !== 'Cancelled') {
+                    if (request.body.statusToBeUpdated !== 'Cancelled' && request.body.statusToBeUpdated !== 'Delivered') {
                         var newUpdatedObject = {
                             "uniqueKey": request.body.uniqueKey,
                             "date_of_order_placing": result[0].myOrders[0].date_of_order_placing,
@@ -1339,7 +1339,7 @@ app.post('/updateUserOrder', function (request, response) {
                                         } else {
                                             if (result.length > 0) {
                                                 var updateAdminOrderPointer = result[0].order_descriptiion.map(function (item) { return item.order_id; }).indexOf(request.body.orderID)
-                                                if (request.body.statusToBeUpdated !== 'Cancelled') {
+                                                if (request.body.statusToBeUpdated !== 'Cancelled' && request.body.statusToBeUpdated !== 'Delivered') {
                                                     result[0].order_descriptiion[updateAdminOrderPointer].itemStatus = request.body.statusToBeUpdated
                                                 } else{
                                                 result[0].order_descriptiion[updateAdminOrderPointer].itemStatus = request.body.statusToBeUpdated

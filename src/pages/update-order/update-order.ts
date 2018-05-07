@@ -26,7 +26,7 @@ export class UpdateOrderPage {
 
   updateOrder(orderStatus, email, uniqueKeyToBeSearched, orderIdOfProduct, particularPrice) {
     var updateUserOrderObject = {};
-    if (orderStatus !== 'Cancelled') {
+    if (orderStatus !== 'Cancelled' && orderStatus !== 'Delivered') {
       updateUserOrderObject = {
         statusToBeUpdated: orderStatus,
         emailToBeSearched: email,
