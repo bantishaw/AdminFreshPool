@@ -8,8 +8,10 @@ import { UpdateOrderPage } from '../update-order/update-order'
   templateUrl: 'home.html'
 })
 export class HomePage {
+  isSearchbarOperandToBeShowen = false;
   existingUser: any;
   orderDetails: any;
+  currentCustomerThatUserTypeForSearch:any;
   constructor(public navCtrl: NavController, public toastCtrl: ToastController,
     public apiProvider: Api, public loadingCtrl: LoadingController, public http: Http) {
 
@@ -27,6 +29,9 @@ export class HomePage {
         loading.dismiss();
         setTimeout(() => {
           this.orderDetails = this.existingUser.data;
+          this.currentCustomerThatUserTypeForSearch=this.existingUser.data;
+
+
         }, 500);
       } else {
         loading.dismiss();
@@ -57,4 +62,39 @@ export class HomePage {
   goToOrder(individualOrder) {
     this.navCtrl.push(UpdateOrderPage, { processOrder: individualOrder });
   }
+
+
+
+  onSearch(event) {
+   
+    var UserNamearray = [];
+    let valuethatUserTypeToSearch = event.target.value;
+    if (!valuethatUserTypeToSearch) {
+      this.WhenuserSearchItemAndDeleteIt();
+    }
+    else {
+      for (var i = 0; i < this.orderDetails.length; i++) {
+      UserNamearray.push(this.orderDetails[i].customerName);
+      }
+      if (valuethatUserTypeToSearch.trim()) {
+        this.orderDetails=this.currentCustomerThatUserTypeForSearch;
+        this.orderDetails = this.orderDetails.filter((topic) => {
+          return ((topic.customerName.toLowerCase()).indexOf(valuethatUserTypeToSearch.toLowerCase()) !== -1);
+        })
+      }
+    }
+  }
+
+
+  WhenuserSearchItemAndDeleteIt() {
+    this.isSearchbarOperandToBeShowen = true;
+   this.orderDetails = this.currentCustomerThatUserTypeForSearch;
+ }
+
+ onCancel() {
+ 
+   this.isSearchbarOperandToBeShowen = false;
+  this.orderDetails = this.currentCustomerThatUserTypeForSearch;
+}
+
 }
