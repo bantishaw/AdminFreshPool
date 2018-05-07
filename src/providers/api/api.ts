@@ -33,7 +33,19 @@ export class Api {
       headers.append('Content-Type', 'application/json');
       this.http.get('https://immense-river-69583.herokuapp.com/getAdminNewOrders', { headers: headers })
         .subscribe(res => {
-          this.settingsInformation = res.json();
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  updateUserOrder(updateUserOrderObject) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      this.http.post('http://localhost:8080/updateUserOrder',updateUserOrderObject, { headers: headers })
+        .subscribe(res => {
           resolve(res.json());
         }, (err) => {
           reject(err);

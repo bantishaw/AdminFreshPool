@@ -548,13 +548,14 @@ app.post('/getAddtoCartData', function (request, response) {
                     "order_descriptiion": order
                 };
                 var adminObject = {
-                  "reference_email": request.body.reference_email,
-                  "customerName": request.body.customerName,
-                  "date_of_order_placing": myCartObject.date_of_order_placing,
-                  "total_amount": myCartObject.total_amount,
-                  "UserAddress": request.body.UserAddress,
-                  "userPhoneNumber": request.body.userPhoneNumber,
-                  "order_descriptiion": order,
+                    "reference_email": request.body.reference_email,
+                    "customerName": request.body.customerName,
+                    "date_of_order_placing": myCartObject.date_of_order_placing,
+                    "total_amount": myCartObject.total_amount,
+                    "UserAddress": request.body.UserAddress,
+                    "userPhoneNumber": request.body.userPhoneNumber,
+                    "uniqueKey": myCartObject.uniqueKey,
+                    "order_descriptiion": order,
                 }
                 databaseConnectivity.collection('UserOrders').find({ reference_email: request.body.reference_email }).toArray(function (error, userOrderResult) {
                     if (error) {
@@ -1289,6 +1290,17 @@ app.get('/getAdminNewOrders', function (request, response) {
             } else {
                 response.json({ "response": "failure", "data": "Welcome Admin. No Orders placed yet" })
             }
+        }
+    })
+})
+
+app.post('/updateUserOrder', function (request, response) {
+    console.log(request.body)
+    databaseConnectivity.collection('UserOrders').find({ "reference_email": request.body.emailToBeSearched }).toArray(function (error, result) {
+        if (error) {
+            throw error;
+        } else {
+            console.log(result[0])
         }
     })
 })
