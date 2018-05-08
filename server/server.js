@@ -1304,7 +1304,6 @@ app.post('/updateUserOrder', function (request, response) {
                 var checkProduct = result[0].myOrders[0].order_descriptiion.map(function (item) { return item.order_id; }).indexOf(request.body.orderID)
                 if (checkProduct !== -1) {
                     result[0].myOrders[0].order_descriptiion[checkProduct].itemStatus = request.body.statusToBeUpdated
-                    result[0].myOrders[0].order_descriptiion[checkProduct].date_of_order_received = dateFormat(request.body.timeStamp, " dS mmmm, yyyy")
                     if (request.body.statusToBeUpdated !== 'Cancelled' && request.body.statusToBeUpdated !== 'Delivered') {
                         var newUpdatedObject = {
                             "uniqueKey": request.body.uniqueKey,
@@ -1313,6 +1312,7 @@ app.post('/updateUserOrder', function (request, response) {
                             "order_descriptiion": result[0].myOrders[0].order_descriptiion
                         }
                     } else {
+                        result[0].myOrders[0].order_descriptiion[checkProduct].date_of_order_received = dateFormat(request.body.timeStamp, " dS mmmm, yyyy")
                         var newUpdatedObject = {
                             "uniqueKey": request.body.uniqueKey,
                             "date_of_order_placing": result[0].myOrders[0].date_of_order_placing,
