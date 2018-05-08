@@ -13,11 +13,9 @@ export class UpdateOrderPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: Api,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.fetchCollection = navParams.get('processOrder');
-    console.log(this.fetchCollection)
     this.fetchCollection.order_descriptiion.forEach(function (object) {
       object.imageStatus = object.itemStatus
     });
-    console.log(this.fetchCollection)
   }
 
   ionViewDidLoad() {
@@ -32,7 +30,7 @@ export class UpdateOrderPage {
         emailToBeSearched: email,
         uniqueKey: uniqueKeyToBeSearched,
         orderID: orderIdOfProduct,
-        timeStamp : Date.now()
+        timeStamp: Date.now()
       }
     } else {
       updateUserOrderObject = {
@@ -41,19 +39,30 @@ export class UpdateOrderPage {
         uniqueKey: uniqueKeyToBeSearched,
         orderID: orderIdOfProduct,
         particularProductPrice: particularPrice,
-        timeStamp : Date.now()
+        timeStamp: Date.now()
       }
-    } 
-    console.log("updateUserOrder", updateUserOrderObject)
+    }
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+      cssClass: "wrapper"
+    });
+    loading.present();
     this.apiProvider.updateUserOrder(updateUserOrderObject).then((data) => {
       this.updatedData = data;
       if (this.updatedData.response === 'success') {
-        this.fetchCollection = this.updatedData.dataTobeShown
-        this.fetchCollection.order_descriptiion.forEach(function (object) {
-          object.imageStatus = object.itemStatus
-        });
+        loading.dismiss();
+        setTimeout(() => {
+          this.toastMessage(this.updatedData.data)
+          this.fetchCollection = this.updatedData.dataTobeShown
+          this.fetchCollection.order_descriptiion.forEach(function (object) {
+            object.imageStatus = object.itemStatus
+          });
+        }, 500);
       } else {
-        this.toastMessage(this.updatedData.data)
+        loading.dismiss();
+        setTimeout(() => {
+          this.toastMessage(this.updatedData.data)
+        }, 500);
       }
     })
   }
@@ -61,7 +70,7 @@ export class UpdateOrderPage {
   toastMessage(message: string) {
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 3000,
+      duration: 1000,
       position: 'middle',
       cssClass: 'showToast'
     });
