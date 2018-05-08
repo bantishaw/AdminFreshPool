@@ -10,8 +10,8 @@ import { LoginPage } from '../pages/login/login';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { UpdateOrderPage } from '../pages/update-order/update-order';
-import {ContactUsPage} from '../pages/contact-us/contact-us';
-import {FeedbackPage} from '../pages/feedback/feedback';
+import { ContactUsPage } from '../pages/contact-us/contact-us';
+import { FeedbackPage } from '../pages/feedback/feedback';
 @NgModule({
   declarations: [
     MyApp,
