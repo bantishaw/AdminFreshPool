@@ -44,7 +44,7 @@ export class Api {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      this.http.post('http://localhost:8080/updateUserOrder',updateUserOrderObject, { headers: headers })
+      this.http.post('https://immense-river-69583.herokuapp.com/updateUserOrder',updateUserOrderObject, { headers: headers })
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
