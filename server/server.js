@@ -1293,7 +1293,7 @@ app.get('/getAdminNewOrders', function (request, response) {
         }
     })
 })
-
+ 
 app.post('/updateUserOrder', function (request, response) {
     console.log(request.body)
     let filter = { "myOrders": { $elemMatch: { "uniqueKey": request.body.uniqueKey } } }
@@ -1346,7 +1346,7 @@ app.post('/updateUserOrder', function (request, response) {
                                                     result[0].total_amount = result[0].total_amount-request.body.particularProductPrice
                                                 }
                                                 
-                                                databaseConnectivity.collection('adminCollection').findOneAndReplace({ "reference_email": request.body.emailToBeSearched }, { $set: {total_amount: result[0].total_amount, order_descriptiion: result[0].order_descriptiion } }, { returnOriginal: false }, function (error, updateAdminResult) {
+                                                databaseConnectivity.collection('adminCollection').findOneAndReplace({"uniqueKey" : request.body.uniqueKey}, { $set: {total_amount: result[0].total_amount, order_descriptiion: result[0].order_descriptiion } }, { returnOriginal: false }, function (error, updateAdminResult) {
                                                     if (error) {
                                                         console.log(error)
                                                         response.json({ "response": "failure", "data": "Please check your Interent connection and try again" })
