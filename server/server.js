@@ -1295,7 +1295,6 @@ app.get('/getAdminNewOrders', function (request, response) {
 })
  
 app.post('/updateUserOrder', function (request, response) {
-    console.log(request.body)
     let filter = { "myOrders": { $elemMatch: { "uniqueKey": request.body.uniqueKey } } }
     databaseConnectivity.collection('UserOrders').find({ "reference_email": request.body.emailToBeSearched }, filter).toArray(function (error, result) {
         if (error) {
@@ -1305,6 +1304,7 @@ app.post('/updateUserOrder', function (request, response) {
                 var checkProduct = result[0].myOrders[0].order_descriptiion.map(function (item) { return item.order_id; }).indexOf(request.body.orderID)
                 if (checkProduct !== -1) {
                     result[0].myOrders[0].order_descriptiion[checkProduct].itemStatus = request.body.statusToBeUpdated
+                    result[0].myOrders[0].order_descriptiion[checkProduct].date_of_order_received = dateFormat(request.body.timeStamp, " dS mmmm, yyyy")
                     if (request.body.statusToBeUpdated !== 'Cancelled' && request.body.statusToBeUpdated !== 'Delivered') {
                         var newUpdatedObject = {
                             "uniqueKey": request.body.uniqueKey,
@@ -1332,7 +1332,7 @@ app.post('/updateUserOrder', function (request, response) {
                                 if (error) {
                                     throw error
                                 } else {
-                                    databaseConnectivity.collection('adminCollection').find({"uniqueKey" : request.body.uniqueKey}).toArray(function (error, result) {
+                                    databaseConnectivity.collection('adminCollection').find({ "uniqueKey": request.body.uniqueKey }).toArray(function (error, result) {
                                         if (error) {
                                             console.log(error)
                                             response.json({ "response": "failure", "data": "Please check your Interent connection and try again" })
@@ -1341,17 +1341,17 @@ app.post('/updateUserOrder', function (request, response) {
                                                 var updateAdminOrderPointer = result[0].order_descriptiion.map(function (item) { return item.order_id; }).indexOf(request.body.orderID)
                                                 if (request.body.statusToBeUpdated !== 'Cancelled' && request.body.statusToBeUpdated !== 'Delivered') {
                                                     result[0].order_descriptiion[updateAdminOrderPointer].itemStatus = request.body.statusToBeUpdated
-                                                } else{
-                                                result[0].order_descriptiion[updateAdminOrderPointer].itemStatus = request.body.statusToBeUpdated
-                                                    result[0].total_amount = result[0].total_amount-request.body.particularProductPrice
+                                                } else {
+                                                    result[0].order_descriptiion[updateAdminOrderPointer].itemStatus = request.body.statusToBeUpdated
+                                                    result[0].total_amount = result[0].total_amount - request.body.particularProductPrice
+                                                    result[0].order_descriptiion[updateAdminOrderPointer].date_of_order_received = dateFormat(request.body.timeStamp, " dS mmmm, yyyy")
                                                 }
-                                                
-                                                databaseConnectivity.collection('adminCollection').findOneAndReplace({"uniqueKey" : request.body.uniqueKey}, { $set: {total_amount: result[0].total_amount, order_descriptiion: result[0].order_descriptiion } }, { returnOriginal: false }, function (error, updateAdminResult) {
+                                                databaseConnectivity.collection('adminCollection').findOneAndReplace({ "uniqueKey": request.body.uniqueKey }, { $set: { total_amount: result[0].total_amount, order_descriptiion: result[0].order_descriptiion } }, { returnOriginal: false }, function (error, updateAdminResult) {
                                                     if (error) {
                                                         console.log(error)
                                                         response.json({ "response": "failure", "data": "Please check your Interent connection and try again" })
-                                                    } else{
-                                                        response.json({ "response": "success","data": `Order is ${request.body.statusToBeUpdated}`, "dataTobeShown": updateAdminResult.value })
+                                                    } else {
+                                                        response.json({ "response": "success", "data": `Order is ${request.body.statusToBeUpdated}`, "dataTobeShown": updateAdminResult.value })
                                                     }
                                                 })
                                             } else {

@@ -19,6 +19,8 @@
       </p>
       <p>Amount to be paid : ₹{{item.particularProductPrice}}</p>
       <p>Payment Mode : {{item.payment_mode}}</p>
+      <p *ngIf="item.imageStatus === 'Delivered'">Delivered on : {{item.date_of_order_received}}</p>
+      <p *ngIf="item.imageStatus === 'Cancelled'">Cancelled on : {{item.date_of_order_received}}</p>
       <ion-list radio-group [(ngModel)]="item.itemStatus" style="margin-left: -15px;">
         <ion-item style="font-size: 13px;">
           <ion-label>Pending</ion-label>
@@ -42,7 +44,7 @@
       </div>
       <div>
         <img src="assets/imgs/Delivered.svg" class="image"  *ngIf="item.imageStatus === 'Delivered'" />
-      </div>
+      </div> 
     </ion-card-content>
     <button ion-button full style="text-transform: capitalize;"  *ngIf= "item.imageStatus !== 'Cancelled' && item.imageStatus !== 'Delivered'"  (click)="updateOrder(item.itemStatus,fetchCollection.reference_email,fetchCollection.uniqueKey,item.order_id,item.particularProductPrice)">Update Order</button>
   </ion-card>

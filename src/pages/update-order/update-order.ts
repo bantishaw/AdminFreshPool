@@ -31,7 +31,8 @@ export class UpdateOrderPage {
         statusToBeUpdated: orderStatus,
         emailToBeSearched: email,
         uniqueKey: uniqueKeyToBeSearched,
-        orderID: orderIdOfProduct
+        orderID: orderIdOfProduct,
+        timeStamp : Date.now()
       }
     } else {
       updateUserOrderObject = {
@@ -39,9 +40,10 @@ export class UpdateOrderPage {
         emailToBeSearched: email,
         uniqueKey: uniqueKeyToBeSearched,
         orderID: orderIdOfProduct,
-        particularProductPrice: particularPrice
+        particularProductPrice: particularPrice,
+        timeStamp : Date.now()
       }
-    }
+    } 
     console.log("updateUserOrder", updateUserOrderObject)
     this.apiProvider.updateUserOrder(updateUserOrderObject).then((data) => {
       this.updatedData = data;
