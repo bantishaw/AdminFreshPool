@@ -57,7 +57,7 @@ export class Api {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      this.http.get('http://localhost:8080/getFeedBack', { headers: headers })
+      this.http.get('https://immense-river-69583.herokuapp.com/getFeedBack', { headers: headers })
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
@@ -70,7 +70,7 @@ export class Api {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      this.http.get('http://localhost:8080/getUserListToWhomeWeHavetoContact', { headers: headers })
+      this.http.get('https://immense-river-69583.herokuapp.com/getUserListToWhomeWeHavetoContact', { headers: headers })
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
