@@ -7,7 +7,11 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-card *ngFor="let item of UserToContact" class="cardStyle">
+    <ion-card-content> {{item.query}}</ion-card-content>
+    <ion-card-content>Name : {{item.name}}</ion-card-content>
+    <ion-card-content>Email : {{item.emailAddress}} </ion-card-content>
+    <ion-card-content> Mobile : {{item.mobile}}</ion-card-content>
+  </ion-card>
 </ion-content>

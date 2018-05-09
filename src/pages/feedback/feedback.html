@@ -7,7 +7,11 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-card *ngFor="let item of feedBackList" class="cardStyle">
+    <ion-card-content>Name :{{item.customerName}}</ion-card-content>
+    <ion-card-content> Email : {{item.email}}</ion-card-content>
+    <ion-card-content>Mobile :{{item.phoneNumber}} </ion-card-content>
+    <ion-card-content>Feedback : {{item.feedback}}</ion-card-content>
+  </ion-card>
 </ion-content>

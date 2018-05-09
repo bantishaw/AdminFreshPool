@@ -1403,5 +1403,37 @@ app.post('/updateUserOrder', function (request, response) {
         }
     })
 })
+
+// Function to display the Feedback from user
+app.get('/getFeedBack', function (request, response) {
+    databaseConnectivity.collection('Feedback').find().toArray(function (error, result) {
+        if (error) {
+            console.log(error)
+            response.json({ "response": "failure", "data": "Please check your Interent connection and try again" })
+        } else {
+            if (result.length > 0) {
+                response.json({ "response": "success", "data": result })
+            } else {
+                response.json({ "response": "failure", "data": "Welcome Admin. No Orders placed yet" })
+            }
+        }
+    })
+})
+
+// Function to display contact us from user
+app.get('/getUserListToWhomeWeHavetoContact', function (request, response) {
+    databaseConnectivity.collection('contactCustomerForQuery').find().toArray(function (error, result) {
+        if (error) {
+            console.log(error)
+            response.json({ "response": "failure", "data": "Please check your Interent connection and try again" })
+        } else {
+            if (result.length > 0) {
+                response.json({ "response": "success", "data": result })
+            } else {
+                response.json({ "response": "failure", "data": "Welcome Admin. No Orders placed yet" })
+            }
+        }
+    })
+})
 app.listen(8080)
 console.log("Running on port 8080") 
