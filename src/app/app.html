@@ -1,24 +1,22 @@
-<ion-menu [content]="content" side="left">
-    <ion-header class="wholebackground">
-      <div>
-          <ion-label class="catergory">Categories</ion-label>
-      </div>
-        
-    </ion-header>
-  
-    <ion-content class="wholebackground">
-      <div >
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="listStyle">
-          {{p.title}}
-          <ion-icon name="ios-arrow-dropright-outline" item-end style="color:#d2d2d2"></ion-icon>
-        </button>
-      </div>
-  
-      <div >
-          <ion-label class="versionPosition">App Version : 1.1.0</ion-label>
-      </div>
-      
-    </ion-content>
-  </ion-menu>
+<ion-menu persistent="true" [content]="content" side="left">
+  <ion-header class="wholebackground">
+    <div>
+      <ion-label class="catergory">Categories</ion-label>
+    </div>
+  </ion-header>
+  <ion-content class="wholebackground">
+    <div>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="listStyle">
+        {{p.title}}
+        <ion-icon name="ios-arrow-dropright-outline" item-end style="color:#d2d2d2"></ion-icon>
+      </button>
+    </div>
 
-<ion-nav [root]="rootPage"  #content swipeBackEnabled="false"></ion-nav>
+    <div>
+      <ion-label class="versionPosition">App Version : 1.1.0</ion-label>
+    </div>
+
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

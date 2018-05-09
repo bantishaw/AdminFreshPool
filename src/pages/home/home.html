@@ -1,10 +1,8 @@
 <ion-header>
-  <ion-navbar>
-     
+  <ion-navbar hideBackButton="true">
     <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu"></ion-icon>
     </button>
-   
     <ion-title class="pageTitle">
       Admin
     </ion-title>
@@ -22,8 +20,8 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar *ngIf="isSearchbarOperandToBeShowen" showCancelButton="true" (ionInput)="onSearch($event)" (ionCancel)="onCancel()"
-  cancelButtonText="Cancel" placeholder="Search  item here... ">
-</ion-searchbar>
+    cancelButtonText="Cancel" placeholder="Search  item here... ">
+  </ion-searchbar>
 
   <ion-card *ngFor="let item of orderDetails" class="cardStyle">
     <ion-card-content>

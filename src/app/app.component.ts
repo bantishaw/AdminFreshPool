@@ -12,7 +12,7 @@ import { FeedbackPage } from '../pages/feedback/feedback';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
   pages: Array<{ title: string, component: any }>;
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
   ) {
@@ -24,7 +24,8 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'ContactUs', component: ContactUsPage },
+      { title: 'Admin Home', component: HomePage },
+      { title: 'Contact Us', component: ContactUsPage },
       { title: 'Feedback', component: FeedbackPage }
     ];
   }
