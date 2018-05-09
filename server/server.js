@@ -1334,12 +1334,20 @@ app.post('/updateUserOrder', function (request, response) {
                             "total_amount": result[0].myOrders[0].total_amount,
                             "order_descriptiion": result[0].myOrders[0].order_descriptiion
                         }
-                    } else {
+                    } else if (request.body.statusToBeUpdated === 'Cancelled') {
                         result[0].myOrders[0].order_descriptiion[checkProduct].date_of_order_received = dateFormat(request.body.timeStamp, " dS mmmm, yyyy")
                         var newUpdatedObject = {
                             "uniqueKey": request.body.uniqueKey,
                             "date_of_order_placing": result[0].myOrders[0].date_of_order_placing,
                             "total_amount": result[0].myOrders[0].total_amount - request.body.particularProductPrice,
+                            "order_descriptiion": result[0].myOrders[0].order_descriptiion
+                        }
+                    } else if (request.body.statusToBeUpdated === 'Delivered') {
+                        result[0].myOrders[0].order_descriptiion[checkProduct].date_of_order_received = dateFormat(request.body.timeStamp, " dS mmmm, yyyy")
+                        var newUpdatedObject = {
+                            "uniqueKey": request.body.uniqueKey,
+                            "date_of_order_placing": result[0].myOrders[0].date_of_order_placing,
+                            "total_amount": result[0].myOrders[0].total_amount,
                             "order_descriptiion": result[0].myOrders[0].order_descriptiion
                         }
                     }
